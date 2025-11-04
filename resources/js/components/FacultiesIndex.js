@@ -92,7 +92,8 @@ const FacultiesIndex = () => {
 
                 if (response.ok) {
                     alert('Faculty archived successfully!');
-                    fetchFaculties(); // Refresh the list
+                    // Redirect to My Profile → Archive Report tab
+                    window.location.href = '/admin/profile?tab=security';
                 } else {
                     alert('Error: ' + (data.message || 'Something went wrong'));
                 }
@@ -111,7 +112,7 @@ const FacultiesIndex = () => {
                     <div className="text-muted small">Handle management and supervision of faculty and academic staff..</div>
                 </div>
                 <div className="page-actions">
-                    <a href="/admin/settings?tab=security" className="btn btn-sm btn-archive-green">Archive</a>
+                    <a href="/admin/profile?tab=security" className="btn btn-sm btn-archive-green">Archive</a>
                     <a href="/admin/faculties/create" className="btn btn-sm btn-add-black">+ Add Faculty</a>
                 </div>
             </div>

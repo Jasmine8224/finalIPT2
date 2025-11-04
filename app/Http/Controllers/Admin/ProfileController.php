@@ -4,8 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\AdminProfile;
+use App\Models\AcademicYear;
+use App\Models\Student;
+use App\Models\Faculty;
+use App\Models\Course;
+use App\Models\Department;
 
 class ProfileController extends BaseController
 {
@@ -18,9 +24,50 @@ class ProfileController extends BaseController
             'last_name' => null,
             'phone' => null,
         ]);
+
+        // Prepare archived datasets for Security tab
+        $archivedYears = AcademicYear::onlyTrashed()->orderByDesc('start_year')->get();
+        $archivedStudents = Student::onlyTrashed()->with(['department', 'course', 'academicYear'])->orderBy('full_name')->get();
+        $archivedFaculties = Faculty::onlyTrashed()->with(['department'])->orderBy('full_name')->get();
+        $archivedCourses = Course::onlyTrashed()->orderBy('code')->get();
+        $archivedDepartments = Department::onlyTrashed()->orderBy('code')->get();
+
+        $archivedItems = [
+            'students' => $archivedStudents,
+            'faculties' => $archivedFaculties,
+            'courses' => $archivedCourses,
+            'departments' => $archivedDepartments,
+            'academic_years' => $archivedYears,
+        ];
+
         return view('layouts.admin-react', [
             'user' => $user,
             'adminProfile' => $profile,
+            'archivedItems' => $archivedItems,
+        ]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::user();
+        $validated = $request->validate([
+            'current_password' => ['required', 'string'],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        if (! Hash::check($validated['current_password'], $user->password)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'The current password is incorrect.'
+            ], 422);
+        }
+
+        $user->password = Hash::make($validated['new_password']);
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Password updated successfully.'
         ]);
     }
 

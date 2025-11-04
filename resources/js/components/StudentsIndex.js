@@ -125,7 +125,8 @@ const StudentsIndex = () => {
 
                 if (response.ok) {
                     alert('Student archived successfully!');
-                    fetchStudents(); // Refresh the list
+                    // Redirect to My Profile → Archive Report tab
+                    window.location.href = '/admin/profile?tab=security';
                 } else {
                     alert('Error: ' + (data.message || 'Something went wrong'));
                 }
@@ -149,7 +150,7 @@ const StudentsIndex = () => {
                     <div className="text-muted small">Maintain and update student records and enrollment details.</div>
                 </div>
                 <div className="page-actions">
-                    <a href="/admin/settings?tab=security" className="btn btn-sm btn-archive-green">Archive</a>
+                    <a href="/admin/profile?tab=security" className="btn btn-sm btn-archive-green">Archive</a>
                     <a href="/admin/students/create" className="btn btn-sm btn-add-black">+ Add Student</a>
                 </div>
             </div>

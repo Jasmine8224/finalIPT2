@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\ProfileController;
 
 // Admin API routes (stateless; used by the React admin UI)
 Route::prefix('admin')->name('api.admin.')->group(function () {
@@ -47,6 +48,8 @@ Route::prefix('admin')->name('api.admin.')->group(function () {
     Route::put('/departments/{department}', [DepartmentController::class, 'apiUpdate'])->name('departments.update');
     Route::patch('/departments/{department}/archive', [DepartmentController::class, 'archive'])->name('departments.archive');
     Route::get('/reports', [ReportController::class, 'apiIndex'])->name('reports.api');
+    // Profile security
+    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
     // Settings/profile and archive/restore endpoints
     Route::post('/settings', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('settings.update');
 

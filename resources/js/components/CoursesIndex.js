@@ -395,13 +395,13 @@ const CoursesIndex = () => {
                                                 <div className="btn-group btn-group-sm">
                                                     <button 
                                                         onClick={() => handleEdit(course)}
-                                                        className="btn btn-outline-primary btn-sm"
+                                                        className="btn btn-sm btn-edit"
                                                     >
                                                         Edit
                                                     </button>
                                                     <button 
                                                         onClick={() => handleArchive(course.id)}
-                                                        className="btn btn-outline-danger btn-sm"
+                                                        className="btn btn-sm btn-archive"
                                                     >
                                                         Archive
                                                     </button>

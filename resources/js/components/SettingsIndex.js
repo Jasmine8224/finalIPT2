@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import AdminLayout from './AdminLayout';
 
 const SettingsIndex = () => {
-    // Get tab from URL parameters, default to 'courses'
+    // Get tab from URL parameters, default to 'courses' (map deprecated 'security' to 'courses')
     const urlParams = new URLSearchParams(window.location.search);
-    const initialTab = urlParams.get('tab') || 'courses';
+    const rawTab = urlParams.get('tab') || 'courses';
+    const initialTab = (rawTab === 'security') ? 'courses' : rawTab;
     const [activeTab, setActiveTab] = useState(initialTab);
     const [courses, setCourses] = useState([]);
     const [departments, setDepartments] = useState([]);
@@ -632,12 +633,6 @@ const SettingsIndex = () => {
                         >
                             📅 Academic
                         </button>
-                        <button 
-                            className={`nav-link ${activeTab === 'security' ? 'active' : ''}`}
-                            onClick={() => handleTabChange('security')}
-                        >
-                            🔒 Security
-                        </button>
                     </div>
                 </div>
 
@@ -703,7 +698,7 @@ const SettingsIndex = () => {
                                                 <div className="col-12 col-lg">
                                                     <div className="form-group mb-0">
                                                         <label className="form-label">Units <span className="text-danger">*</span></label>
-                                                        <input type="number" className={`form-control ${formErrors.units ? 'is-invalid' : ''}`} value={courseForm.units} onChange={(e) => setCourseForm({...courseForm, units: parseInt(e.target.value)})} min="1" max="6" required />
+                                                        <input type="number" className={`form-control ${formErrors.units ? 'is-invalid' : ''}`} value={courseForm.units} onChange={(e) => setCourseForm({...courseForm, units: parseInt(e.target.value)})} min="1" max="40" required />
                                                         {formErrors.units && <div className="invalid-feedback">{formErrors.units[0]}</div>}
                                                     </div>
                                                 </div>
@@ -755,14 +750,14 @@ const SettingsIndex = () => {
                                                             <td className="action-buttons">
                                                                 <div className="btn-group" role="group">
                                                                     <button 
-                                                                        className="btn btn-sm btn-outline-primary"
+                                                                        className="btn btn-sm btn-edit"
                                                                         onClick={() => handleEdit(course, 'course')}
                                                                         title="Edit Course"
                                                                     >
                                                                         Edit
                                                                     </button>
                                                                     <button 
-                                                                        className="btn btn-sm btn-outline-danger"
+                                                                        className="btn btn-sm btn-archive"
                                                                         onClick={() => handleArchiveCourse(course.id)}
                                                                         title="Archive Course"
                                                                     >
@@ -863,14 +858,14 @@ const SettingsIndex = () => {
                                                             <td className="action-buttons">
                                                                 <div className="btn-group" role="group">
                                                                     <button 
-                                                                        className="btn btn-sm btn-outline-primary"
+                                                                        className="btn btn-sm btn-edit"
                                                                         onClick={() => handleEdit(dept, 'department')}
                                                                         title="Edit Department"
                                                                     >
                                                                         Edit
                                                                     </button>
                                                                     <button 
-                                                                        className="btn btn-sm btn-outline-danger"
+                                                                        className="btn btn-sm btn-archive"
                                                                         onClick={() => handleArchiveDepartment(dept.id)}
                                                                         title="Archive Department"
                                                                     >
@@ -962,368 +957,20 @@ const SettingsIndex = () => {
                                                             </td>
                                                             <td>
                                                                 <button 
-                                                                    className="btn btn-sm btn-outline-primary me-1"
+                                                                    className="btn btn-sm btn-edit me-1"
                                                                     onClick={() => handleEdit(year, 'academic_year')}
                                                                 >
-                                                                    📝 Edit
+                                                                    Edit
                                                                 </button>
                                                                 <button 
-                                                                    className="btn btn-sm btn-outline-danger"
+                                                                    className="btn btn-sm btn-archive"
                                                                     onClick={() => handleArchive('academic_year', year.id)}
                                                                 >
-                                                                    🗄️ Archive
+                                                                    Archive
                                                                 </button>
                                                             </td>
                                                         </tr>
                                                     ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {activeTab === 'security' && (
-                        <div className="settings-panel">
-                            <div className="panel-header">
-                                <h5>Security Management</h5>
-                                <p>Manage archived students, faculties, courses, departments, and academic years</p>
-                            </div>
-                            
-
-                            {/* Archived Students */}
-                            <div className="row mb-4">
-                                <div className="col-12">
-                                    <div className="table-card">
-                                        <h6>Archived Students</h6>
-                                        <p className="text-muted small">Students that have been archived can be restored or permanently deleted.</p>
-                                        <div className="table-responsive">
-                                            <table className="table table-sm">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Full Name</th>
-                                                        <th>Email</th>
-                                                        <th>Department</th>
-                                                        <th>Course</th>
-                                                        <th>Academic Year</th>
-                                                        <th>Archived Date</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {archivedStudents.length === 0 ? (
-                                                        <tr>
-                                                            <td colSpan="8" className="text-center text-muted py-4">
-                                                                <div className="empty-state">
-                                                                    <div className="empty-icon">🎓</div>
-                                                                    <div className="empty-text">No archived students found</div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    ) : (
-                                                        archivedStudents.map(student => (
-                                                            <tr key={student.id}>
-                                                                <td>
-                                                                    <span className="badge bg-secondary">#{student.id}</span>
-                                                                </td>
-                                                                <td>
-                                                                    <strong>{student.full_name}</strong>
-                                                                    {student.suffix && <small className="text-muted"> {student.suffix}</small>}
-                                                                </td>
-                                                                <td>
-                                                                    <small className="text-muted">{student.email || 'N/A'}</small>
-                                                                </td>
-                                                                <td>
-                                                                    <span className="badge bg-info">{student.department?.name || 'N/A'}</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span className="badge bg-primary">{student.course?.title || 'N/A'}</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span className="badge bg-warning text-dark">{student.academic_year ? `${student.academic_year.start_year}-${student.academic_year.end_year}` : 'N/A'}</span>
-                                                                </td>
-                                                                <td>
-                                                                    <small className="text-muted">{new Date(student.deleted_at).toLocaleDateString()}</small>
-                                                                </td>
-                                                                <td>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-success me-1"
-                                                                        onClick={() => handleRestoreStudent(student.id)}
-                                                                    >
-                                                                        Restore
-                                                                    </button>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-danger"
-                                                                        onClick={() => handleForceDeleteStudent(student.id)}
-                                                                    >
-                                                                        Delete Permanently
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        ))
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Archived Faculties */}
-                            <div className="row">
-                                <div className="col-12">
-                                    <div className="table-card">
-                                        <h6>Archived Faculties</h6>
-                                        <p className="text-muted small">Faculty members that have been archived can be restored or permanently deleted.</p>
-                                        <div className="table-responsive">
-                                            <table className="table table-sm">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Full Name</th>
-                                                        <th>Email</th>
-                                                        <th>Department</th>
-                                                        <th>Position</th>
-                                                        <th>Contact</th>
-                                                        <th>Archived Date</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {archivedFaculties.length === 0 ? (
-                                                        <tr>
-                                                            <td colSpan="8" className="text-center text-muted py-4">
-                                                                <div className="empty-state">
-                                                                    <div className="empty-icon">🧑‍🏫</div>
-                                                                    <div className="empty-text">No archived faculties found</div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    ) : (
-                                                        archivedFaculties.map(faculty => (
-                                                            <tr key={faculty.id}>
-                                                                <td>
-                                                                    <span className="badge bg-secondary">#{faculty.id}</span>
-                                                                </td>
-                                                                <td>
-                                                                    <strong>{faculty.full_name}</strong>
-                                                                    {faculty.suffix && <small className="text-muted"> {faculty.suffix}</small>}
-                                                                    <br />
-                                                                    <small className="text-muted">{faculty.sex}</small>
-                                                                </td>
-                                                                <td>
-                                                                    <small className="text-muted">{faculty.email || 'N/A'}</small>
-                                                                </td>
-                                                                <td>
-                                                                    <span className="badge bg-info">{faculty.department?.name || 'N/A'}</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span className="badge bg-success">{faculty.position || 'N/A'}</span>
-                                                                </td>
-                                                                <td>
-                                                                    <small className="text-muted">{faculty.contact_number || 'N/A'}</small>
-                                                                </td>
-                                                                <td>
-                                                                    <small className="text-muted">{new Date(faculty.deleted_at).toLocaleDateString()}</small>
-                                                                </td>
-                                                                <td>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-success me-1"
-                                                                        onClick={() => handleRestoreFaculty(faculty.id)}
-                                                                    >
-                                                                        Restore
-                                                                    </button>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-danger"
-                                                                        onClick={() => handleForceDeleteFaculty(faculty.id)}
-                                                                    >
-                                                                        Delete Permanently
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        ))
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Archived Courses */}
-                            <div className="row mb-4">
-                                <div className="col-12">
-                                    <div className="table-card">
-                                        <h6>Archived Courses</h6>
-                                        <p className="text-muted small">Courses that have been archived can be restored or permanently deleted.</p>
-                                        <div className="table-responsive">
-                                            <table className="table table-sm">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Code</th>
-                                                        <th>Title</th>
-                                                        <th>Department</th>
-                                                        <th>Units</th>
-                                                        <th>Archived Date</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {archivedCourses.length === 0 ? (
-                                                        <tr>
-                                                            <td colSpan="6" className="text-center text-muted py-4">
-                                                                <div className="empty-state">
-                                                                    <div className="empty-icon">📚</div>
-                                                                    <div className="empty-text">No archived courses found</div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    ) : (
-                                                        archivedCourses.map(course => (
-                                                            <tr key={course.id}>
-                                                                <td>{course.code}</td>
-                                                                <td>{course.title}</td>
-                                                                <td>{course.department?.name}</td>
-                                                                <td>{course.units}</td>
-                                                                <td>{new Date(course.deleted_at).toLocaleDateString()}</td>
-                                                                <td>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-success me-1"
-                                                                        onClick={() => handleRestoreCourse(course.id)}
-                                                                    >
-                                                                        Restore
-                                                                    </button>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-danger"
-                                                                        onClick={() => handleForceDeleteCourse(course.id)}
-                                                                    >
-                                                                        Delete Permanently
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        ))
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Archived Departments */}
-                            <div className="row mb-4">
-                                <div className="col-12">
-                                    <div className="table-card">
-                                        <h6>Archived Departments</h6>
-                                        <p className="text-muted small">Departments that have been archived can be restored or permanently deleted.</p>
-                                        <div className="table-responsive">
-                                            <table className="table table-sm">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Code</th>
-                                                        <th>Name</th>
-                                                        <th>Location</th>
-                                                        <th>Archived Date</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {archivedDepartments.length === 0 ? (
-                                                        <tr>
-                                                            <td colSpan="5" className="text-center text-muted py-4">
-                                                                <div className="empty-state">
-                                                                    <div className="empty-icon">🏢</div>
-                                                                    <div className="empty-text">No archived departments found</div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    ) : (
-                                                        archivedDepartments.map(department => (
-                                                            <tr key={department.id}>
-                                                                <td>{department.code}</td>
-                                                                <td>{department.name}</td>
-                                                                <td>{department.location || '—'}</td>
-                                                                <td>{new Date(department.deleted_at).toLocaleDateString()}</td>
-                                                                <td>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-success me-1"
-                                                                        onClick={() => handleRestoreDepartment(department.id)}
-                                                                    >
-                                                                        Restore
-                                                                    </button>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-danger"
-                                                                        onClick={() => handleForceDeleteDepartment(department.id)}
-                                                                    >
-                                                                        Delete Permanently
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        ))
-                                                    )}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Archived Academic Years */}
-                            <div className="row mb-4">
-                                <div className="col-12">
-                                    <div className="table-card">
-                                        <h6>Archived Academic Years</h6>
-                                        <p className="text-muted small">Academic years that have been archived can be restored or permanently deleted.</p>
-                                        <div className="table-responsive">
-                                            <table className="table table-sm">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Academic Year</th>
-                                                        <th>Status</th>
-                                                        <th>Archived Date</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {archivedAcademicYears.length === 0 ? (
-                                                        <tr>
-                                                            <td colSpan="4" className="text-center text-muted py-4">
-                                                                <div className="empty-state">
-                                                                    <div className="empty-icon">📅</div>
-                                                                    <div className="empty-text">No archived academic years found</div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    ) : (
-                                                        archivedAcademicYears.map(year => (
-                                                            <tr key={year.id}>
-                                                                <td>{year.start_year} - {year.end_year}</td>
-                                                                <td>
-                                                                    <span className={`status-badge status-${year.status}`}>
-                                                                        {year.status}
-                                                                    </span>
-                                                                </td>
-                                                                <td>{new Date(year.deleted_at).toLocaleDateString()}</td>
-                                                                <td>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-success me-1"
-                                                                        onClick={() => handleRestoreAcademicYear(year.id)}
-                                                                    >
-                                                                        Restore
-                                                                    </button>
-                                                                    <button 
-                                                                        className="btn btn-sm btn-outline-danger"
-                                                                        onClick={() => handleForceDeleteAcademicYear(year.id)}
-                                                                    >
-                                                                        Delete Permanently
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        ))
-                                                    )}
                                                 </tbody>
                                             </table>
                                         </div>

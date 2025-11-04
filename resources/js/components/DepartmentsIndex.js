@@ -245,14 +245,17 @@ const DepartmentsIndex = () => {
                             </div>
                             <div className="form-group mb-3">
                                 <label className="form-label">Location</label>
-                                <input
-                                    type="text"
+                                <select
                                     name="location"
                                     value={formData.location}
                                     onChange={handleInputChange}
                                     className={`form-control ${errors.location ? 'is-invalid' : ''}`}
-                                    placeholder="CB Building, 2nd Floor"
-                                />
+                                >
+                                    <option value="">Select Location</option>
+                                    <option value="CBS">CBS</option>
+                                    <option value="CBE">CBE</option>
+                                    <option value="CB">CB</option>
+                                </select>
                                 {errors.location && <div className="invalid-feedback">{errors.location[0]}</div>}
                             </div>
                             <div className="d-flex gap-2">
@@ -322,13 +325,13 @@ const DepartmentsIndex = () => {
                                                 <div className="btn-group btn-group-sm">
                                                     <button 
                                                         onClick={() => handleEdit(department)}
-                                                        className="btn btn-outline-primary btn-sm"
+                                                        className="btn btn-sm btn-edit"
                                                     >
                                                         Edit
                                                     </button>
                                                     <button 
                                                         onClick={() => handleArchive(department.id)}
-                                                        className="btn btn-outline-danger btn-sm"
+                                                        className="btn btn-sm btn-archive"
                                                     >
                                                         Archive
                                                     </button>
