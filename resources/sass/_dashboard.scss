@@ -1,0 +1,420 @@
+// Dashboard Styles
+
+.dashboard-container {
+  padding: 0.5rem 0;
+}
+
+// Stats Cards
+.stats-grid {
+  .stats-card {
+    border: 0;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    padding: 1.5rem;
+    height: 100%;
+
+    .stats-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+
+      .stats-label {
+        color: #6c757d;
+        font-size: 0.875rem;
+      }
+
+      .stats-icon {
+        font-size: 1.25rem;
+      }
+    }
+
+    .stats-value {
+      font-size: 2.5rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .stats-change {
+      font-size: 0.875rem;
+      color: #28a745;
+
+      .stats-trend {
+        color: #6c757d;
+      }
+    }
+
+    .stats-description {
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Overview Section
+.overview-section {
+  .overview-card {
+    border: 0;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    padding: 1.5rem;
+
+    .overview-title {
+      font-size: 1.1rem;
+      color: #6c757d;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+  }
+
+  .overview-grid {
+    .overview-item {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      background: #f6f6f6;
+      margin: 0.5rem 0;
+      transition: background 0.15s ease, transform 0.05s ease;
+
+      &:hover {
+        background: #efefef;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      &:active {
+        transform: scale(0.998);
+      }
+
+      .overview-item-content {
+        display: flex;
+        align-items: center;
+
+        .overview-icon {
+          width: 40px;
+          height: 40px;
+          display: grid;
+          place-items: center;
+          border-radius: 10px;
+          margin-right: 0.6rem;
+          font-size: 1.25rem;
+
+          &.student-icon {
+            background: #e3f2fd;
+            color: #1976d2;
+          }
+
+          &.faculty-icon {
+            background: #e8f5e8;
+            color: #388e3c;
+          }
+
+          &.course-icon {
+            background: #f3e5f5;
+            color: #7b1fa2;
+          }
+
+          &.department-icon {
+            background: #fff3e0;
+            color: #f57c00;
+          }
+        }
+
+        .overview-label {
+          font-weight: 500;
+        }
+      }
+
+      .overview-count {
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .stats-grid {
+    .stats-card {
+      margin-bottom: 1rem;
+      
+      .stats-value {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .overview-section {
+    .overview-grid {
+      .overview-item {
+        padding: 0.75rem;
+        
+        .overview-item-content {
+          .overview-icon {
+            width: 35px;
+            height: 35px;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Chart Cards
+.chart-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  height: 100%;
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e9ecef;
+
+    .chart-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #495057;
+      margin: 0;
+    }
+
+    .chart-icon {
+      font-size: 1.5rem;
+      opacity: 0.7;
+    }
+  }
+
+  .chart-content {
+    .chart-bars {
+      .chart-bar-item {
+        margin-bottom: 1rem;
+
+        .chart-bar-label {
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #6c757d;
+          margin-bottom: 0.5rem;
+        }
+
+        .chart-bar-container {
+          position: relative;
+          background: #f8f9fa;
+          border-radius: 8px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          padding: 0 0.75rem;
+
+          .chart-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            min-width: 2px;
+            transition: width 0.3s ease;
+          }
+
+          .chart-bar-value {
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9rem;
+            margin-left: auto;
+          }
+        }
+      }
+    }
+
+    .chart-empty {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #6c757d;
+
+      .empty-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+      }
+
+      .empty-message {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// --- Admin Coral Theme Additions ---
+// Palette approximating the mockup
+$coral: #e17b7b;
+$coral-dark: #cc6a6a;
+$coral-light: #ef9a9a;
+$ink: #0f0f0f;
+$muted-ink: #5a5a5a;
+
+.dash-wrap {
+  h1 {
+    font-family: 'Poppins', 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 2.75rem;
+    color: $ink;
+  }
+  .text-muted {
+    color: #9a6161 !important;
+    font-weight: 600;
+  }
+}
+
+// Top KPI cards
+.kpi {
+  position: relative;
+  border-radius: 18px;
+  background: $coral;
+  color: $ink;
+  padding: 1.25rem;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.22);
+  min-height: 150px;
+
+  .kpi-icon {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-size: 1.1rem;
+    opacity: 0.7;
+  }
+  .kpi-title { font-weight: 700; }
+  .kpi-sub { color: rgba(0,0,0,0.6); font-size: .9rem; }
+  .kpi-value { font-weight: 800; font-size: 2rem; position:absolute; left: 18px; bottom: 16px; }
+}
+
+.kpi-purple, .kpi-blue, .kpi-pink { background: $coral; }
+
+// Simple content cards to match rounded coral containers
+.simple-card {
+  border: 0;
+  border-radius: 20px;
+  background: $coral;
+  color: $ink;
+  box-shadow: 0 10px 22px rgba(0,0,0,.22);
+}
+
+// Coral panel with inner white cards (Recent Activities & Notifications)
+.coral-panel {
+  background: $coral;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 10px 22px rgba(0,0,0,.22);
+  margin-bottom: 1rem;
+
+  .inner-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
+  }
+
+  .inner-header { margin-bottom: .5rem; }
+  .inner-title { color: #0f0f0f; font-weight: 800; font-size: 1.25rem; }
+  .inner-trend { color: #2e7d32; font-weight: 700; }
+
+  .activity-list,
+  .notif-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .activity-list li,
+  .notif-list li { padding: .35rem 0; color: #2b2b2b; }
+  .a-icon, .n-icon { margin-right: .5rem; }
+}
+
+// Search bar
+.searchbar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: #f4f4f4;
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  .icon { opacity: .7; }
+  input { border: 0; background: transparent; outline: none; }
+}
+
+// Cleaner inputs inside coral card
+.form-clean {
+  background: rgba(255,255,255,.65);
+  border: 0;
+  border-radius: 12px;
+  &:focus { box-shadow: 0 0 0 .25rem rgba(225,123,123,.25); }
+}
+
+// Academic overview tiles (rows)
+.overview-tile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255,255,255,.35);
+  border-radius: 12px;
+  padding: .75rem 1rem;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,.06);
+  transition: transform .05s ease, background .15s ease;
+
+  &:hover { background: rgba(255,255,255,.5); text-decoration: none; }
+  &:active { transform: scale(.995); }
+
+  .tile-icon { font-size: 1.25rem; margin-right: .75rem; }
+  .tile-label { font-weight: 700; }
+  .tile-count {
+    font-weight: 800;
+    font-size: 1.1rem;
+    background: rgba(255,255,255,.6);
+    padding: .25rem .6rem;
+    border-radius: 10px;
+    min-width: 44px;
+    text-align: center;
+  }
+}
+
+// Bank card demo styling
+.bank-card {
+  border-radius: 16px;
+  background: linear-gradient(135deg, $coral-dark, $coral);
+  color: white;
+  padding: 1rem;
+  .bc-name { font-weight: 600; opacity: .9; }
+  .bc-balance { font-weight: 800; font-size: 1.4rem; }
+  .bc-digits { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; opacity: .85; }
+}
+
+// Transaction list
+.tx-list {
+  .tx-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .6rem .25rem; border-bottom: 1px dashed rgba(0,0,0,.1);
+  }
+  .tx-left { display: flex; align-items: center; gap: .6rem; }
+  .tx-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; background: rgba(255,255,255,.6); }
+  .tx-title { font-weight: 700; }
+  .tx-sub { color: rgba(0,0,0,.6); font-size: .85rem; }
+  .tx-amt { font-weight: 800; }
+}

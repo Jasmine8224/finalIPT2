@@ -1,0 +1,253 @@
+// Faculty Management Styles (Coral Ribbon Variant)
+
+// Global header actions (ensure availability outside tables)
+.page-actions { display:flex; gap:.6rem; justify-content:flex-end; align-items:center; }
+.btn-archive-green { background:#2f4938; color:#fff; border:0; border-radius:9999px; padding:.5rem 1.1rem; font-weight:700; box-shadow: inset 0 -2px 0 rgba(0,0,0,.15); }
+.btn-archive-green:hover{ filter:brightness(1.05); }
+.btn-archive-green:active{ transform: translateY(1px); }
+.btn-add-black { background:#0a0a0a; color:#fff; border:0; border-radius:9999px; padding:.5rem 1.1rem; font-weight:700; box-shadow: inset 0 -2px 0 rgba(0,0,0,.25); }
+.btn-add-black:hover{ filter:brightness(1.05); }
+.btn-add-black:active{ transform: translateY(1px); }
+
+$coral: #e17b7b;
+$coral-dark: #cc6a6a;
+$shell: #fff7f7;
+
+// Filter Section
+.faculty-filters {
+  .filter-row {
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .filter-input { min-width: 200px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; }
+
+  .filter-select { min-width: 150px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; }
+
+  .clear-filters-btn {
+    white-space: nowrap;
+  }
+}
+
+// Faculty Table Styles
+.faculties-table {
+  margin-top: 0.75rem;
+  // Top-right actions container (if present in markup)
+  .page-actions { display:flex; gap:.6rem; justify-content:flex-end; align-items:center; }
+
+  // Pill buttons (match students)
+  .btn-archive-green {
+    background:#2f4938; color:#fff; border:0; border-radius:9999px; padding:.5rem 1.1rem; font-weight:700;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,.15);
+    &:hover{ filter:brightness(1.05); }
+    &:active{ transform: translateY(1px); }
+  }
+  .btn-add-black {
+    background:#0a0a0a; color:#fff; border:0; border-radius:9999px; padding:.5rem 1.1rem; font-weight:700;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,.25);
+    &:hover{ filter:brightness(1.05); }
+    &:active{ transform: translateY(1px); }
+  }
+
+  .faculty-card {
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    background: $coral; // match Students coral wrapper
+    position: relative;
+    padding: 1rem; // match Students spacing
+
+    // No ribbon
+    &::before { display: none; }
+
+    .table-responsive {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 0;
+      overflow: hidden; // keep rounded corners clean
+    }
+
+    .table {
+      margin-bottom: 0;
+
+      th {
+        background-color: rgba(255,255,255,.8);
+        border-bottom: 2px solid #f1d4d4; // match Students header divider
+        font-weight: 700;
+        color: #0f0f0f;
+        padding: 1rem 0.75rem;
+      }
+
+      td {
+        padding: 0.875rem 0.75rem;
+        vertical-align: middle;
+        border-bottom: 1px solid #f7e2e2;
+      }
+
+      tbody tr {
+        transition: background-color 0.15s ease;
+        &:hover { background-color: #fff7f7; }
+
+        &:last-child td { border-bottom: none !important; }
+      }
+    }
+  }
+
+  // Employee Number styling
+  .employee-no {
+    font-weight: 600;
+    color: #2c3e50;
+    font-family: 'Courier New', monospace;
+  }
+
+  // Status badge styling
+  .status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &.status-active {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    &.status-inactive {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    &.status-pending {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+  }
+
+  // Action buttons
+  .action-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    
+    .btn {
+      margin-left: 0;
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+
+      &.btn-edit {
+        background-color: #111827;
+        border-color: #111827;
+        color: #fff;
+
+        &:hover {
+          background-color: #6c757d;
+          color: white;
+        }
+      }
+
+      &.btn-archive {
+        background-color: transparent;
+        border-color: #dc3545;
+        color: #dc3545;
+      
+        &:hover {
+          background-color: #dc3545;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+// Empty state styling
+.empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #6c757d;
+
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  .empty-message {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .empty-submessage {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+}
+
+// Pagination styling
+.pagination-wrapper {
+  background-color: white;
+  border-top: 1px solid #dee2e6;
+  padding: 1rem;
+
+  .pagination {
+    margin-bottom: 0;
+    justify-content: center;
+
+    .page-link {
+      border-radius: 6px;
+      margin: 0 2px;
+      border: 1px solid #dee2e6;
+      color: #6c757d;
+
+      &:hover {
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
+      }
+    }
+
+    .page-item.active .page-link {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .faculty-filters {
+    .filter-row {
+      flex-direction: column;
+      
+      .col-auto {
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+
+      .filter-input,
+      .filter-select {
+        width: 100%;
+        min-width: auto;
+      }
+    }
+  }
+
+  .faculties-table {
+    .table-responsive {
+      border-radius: 12px;
+    }
+
+    .action-buttons {
+      gap: 0.5rem;
+      
+      .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        margin-left: 0;
+      }
+    }
+  }
+}

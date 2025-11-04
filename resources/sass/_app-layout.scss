@@ -1,0 +1,88 @@
+// Main App Layout Styles
+
+// CSS Variables
+:root {
+  --brand-start: #f8b0c1;
+  --brand-mid: #ff9bb3;
+  --brand-end: #bde9e6;
+}
+
+// Base styles
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: #f5f6f8; // light gray background
+  min-height: 100vh;
+}
+
+// Navbar
+.navbar {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(6px);
+}
+
+// Brand gradient text
+.brand-gradient {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ff4db8, #ffb3e1, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+// Soft card style
+.card.soft {
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(180deg, rgba(189, 233, 230, 0.7), rgba(246, 172, 185, 0.85));
+
+  .card-body {
+    backdrop-filter: blur(4px);
+  }
+}
+
+// Brand button
+.btn-brand {
+  background: #ffffff;
+  border: 0;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1) inset;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #f7f7f7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Form controls
+.form-control,
+.form-select {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #ddd;
+  transition: all 0.15s ease;
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+}
+
+// Form labels
+label.form-label {
+  color: #343a40;
+  font-weight: 500;
+}

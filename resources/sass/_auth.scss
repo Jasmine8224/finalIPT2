@@ -1,0 +1,249 @@
+// Authentication Styles (Coral Theme)
+
+// Main auth layout
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: #fff5f5;
+}
+
+// Brand banner
+.brand-banner {
+  position: fixed;
+  top: 14px;
+  left: 18px;
+  z-index: 1000;
+  pointer-events: none; // Prevent interference with content
+
+  .brand-gradient {
+    font-size: 28px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ff4db8, #ffb3e1, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+// Portal card
+.portal-card {
+  max-width: 680px;
+  border-radius: 28px;
+  border: 0;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  $coral: #e17b7b;
+  $coral-dark: #cc6a6a;
+  background: radial-gradient(220px 220px at 110% -20%, rgba(255,255,255,.35), transparent),
+              linear-gradient(180deg, lighten($coral, 6%), $coral);
+
+  .card-body {
+    backdrop-filter: blur(2px);
+    padding: 3rem 3.5rem;
+
+    @media (max-width: 768px) {
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  // Portal header
+  .portal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    .portal-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .portal-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+      color: #0f0f0f;
+
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+      }
+    }
+
+    .portal-subtitle {
+      color: #5a2f2f;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  }
+
+  // Portal form
+  .portal-form {
+    max-width: 520px;
+    margin: 0 auto;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      .form-label {
+        color: #343a40;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .portal-input {
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(0,0,0,.08);
+        transition: all 0.15s ease;
+
+        &:focus {
+          background: rgba(255, 255, 255, 1);
+          border-color: #e17b7b;
+          box-shadow: 0 0 0 0.2rem rgba(225, 123, 123, 0.25);
+        }
+
+        &.is-invalid {
+          border-color: #dc3545;
+          background: rgba(248, 215, 218, 0.8);
+
+          &:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+          }
+        }
+      }
+
+      .invalid-feedback {
+        font-size: 0.875rem;
+        color: #dc3545;
+        margin-top: 0.25rem;
+      }
+    }
+
+    .portal-submit {
+      max-width: 340px;
+      margin: 18px auto 0;
+      display: block;
+      width: 100%;
+      padding: 0.9rem 2rem;
+      background: #111827;
+      color: #fff;
+      border: 0;
+      border-radius: 12px;
+      font-weight: 800;
+      letter-spacing: .3px;
+      box-shadow: 0 10px 22px rgba(0,0,0,.15);
+      transition: transform .06s ease, filter .15s ease;
+
+      &:hover {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        max-width: none;
+      }
+    }
+  }
+
+  // Portal footer
+  .portal-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+    .portal-link {
+      color: #6c757d;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: #495057;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Remember me checkbox
+.form-check {
+  .form-check-input {
+    &:checked {
+      background-color: #e17b7b;
+      border-color: #e17b7b;
+    }
+  }
+
+  .form-check-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+}
+
+// Password reset styles
+.password-reset {
+  .reset-info {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    .reset-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .reset-message {
+      color: #6c757d;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Email verification styles
+.email-verification {
+  .verification-info {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    .verification-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .verification-message {
+      color: #6c757d;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .resend-link {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

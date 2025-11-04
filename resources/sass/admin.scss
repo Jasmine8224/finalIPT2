@@ -1,0 +1,21 @@
+// Admin-specific styles
+// This file is compiled separately from the main app.scss
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Admin Components
+@import 'admin-layout';
+@import 'dashboard';
+@import 'students';
+@import 'faculties';
+@import 'courses';
+@import 'departments';
+@import 'settings';
+@import 'forms';
+@import 'profile';
+@import 'reports';

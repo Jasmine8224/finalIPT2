@@ -1,0 +1,281 @@
+// Reports Page Styles (Coral Creative)
+
+.reports-container {
+  padding: 0.5rem 0;
+  $coral: #e17b7b;
+  $coral-dark: #cc6a6a;
+  $shell: #fff7f7;
+
+  // Report Settings Section
+  .report-settings {
+    margin-bottom: 1.5rem;
+
+    .report-pill {
+      display: inline-block;
+      background: rgba(225, 123, 123, 0.15);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 700;
+      color: #5a2f2f;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      border: 1px solid rgba(225, 123, 123, 0.35);
+    }
+
+    .report-panel {
+      border-radius: 24px;
+      background: linear-gradient(180deg, lighten($coral, 14%), $coral);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+      padding: 2rem;
+
+      @media (max-width: 768px) {
+        padding: 1.5rem;
+        border-radius: 16px;
+      }
+
+      .form-label {
+        font-weight: 700;
+        color: #0f0f0f;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .form-select,
+      .form-control {
+        border-radius: 12px;
+        border: 1px solid rgba(0,0,0,.08);
+        background: #fff7f7;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        transition: all 0.15s ease;
+
+        &:focus {
+          border-color: $coral;
+          box-shadow: 0 0 0 0.2rem rgba(225, 123, 123, 0.25);
+        }
+      }
+
+      .report-generate {
+        background: #111827;
+        color: #fff;
+        border: 0;
+        border-radius: 12px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 800;
+        font-size: 0.9rem;
+        transition: all 0.15s ease;
+        cursor: pointer;
+
+        &:hover { filter: brightness(1.05); transform: translateY(-1px); }
+        &:active { transform: translateY(0); }
+      }
+
+      // KPI chips under the form
+      .report-kpis {
+        display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem;
+        .kpi-chip {
+          background: rgba(255,255,255,.85);
+          border: 1px solid rgba(0,0,0,.06);
+          border-radius: 999px; padding: .4rem .9rem; font-weight: 700; color:#0f0f0f;
+        }
+      }
+    }
+  }
+
+  // Applied Filters Section
+  .applied-filters {
+    margin: 1.5rem 0;
+
+    .filters-label {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .filters-list {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+
+      .filter-badge {
+        padding: 0.25rem 0.75rem;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #495057;
+      }
+    }
+  }
+
+  // Report Table Section
+  .report-table {
+    .report-card {
+      border: 0;
+      border-radius: 20px;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      margin-top: 1.5rem;
+      background: $coral;
+
+      .table-wrap { background:#fff; border-radius:14px; }
+
+      .table {
+        margin-bottom: 0;
+
+        th {
+          background-color: rgba(255,255,255,.85);
+          border-bottom: 2px solid #f1d4d4;
+          font-weight: 800;
+          color: #0f0f0f;
+          padding: 1rem 0.75rem;
+          font-size: 0.9rem;
+        }
+
+        td {
+          padding: 0.875rem 0.75rem;
+          vertical-align: middle;
+          border-bottom: 1px solid #f1f3f4;
+          font-size: 0.9rem;
+        }
+
+        tbody tr {
+          transition: background-color 0.15s ease;
+
+          &:hover { background-color: #fff7f7; }
+
+          &:last-child td {
+            border-bottom: none;
+          }
+        }
+      }
+
+      // Student/Employee Number styling
+      .record-number {
+        font-weight: 600;
+        color: #2c3e50;
+        font-family: 'Courier New', monospace;
+        font-size: 0.85rem;
+      }
+
+      // Status styling
+      .status-text {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: capitalize;
+
+        &.status-active { background-color: #d4edda; color: #155724; }
+
+        &.status-inactive { background-color: #f8d7da; color: #721c24; }
+
+        &.status-pending { background-color: #fff3cd; color: #856404; }
+      }
+
+      // Empty state styling
+      .empty-state {
+        padding: 3rem 1rem;
+        text-align: center;
+        color: #6c757d;
+        background: #fff7f7;
+        border-radius: 12px;
+
+        .empty-icon {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+          opacity: 0.5;
+        }
+
+        .empty-message {
+          font-size: 1.1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .empty-submessage {
+          font-size: 0.9rem;
+          opacity: 0.8;
+        }
+      }
+    }
+
+    // Pagination styling
+    .pagination-wrapper {
+      background-color: white;
+      border-top: 1px solid #dee2e6;
+      padding: 1rem;
+
+      .pagination {
+        margin-bottom: 0;
+        justify-content: center;
+
+        .page-link {
+          border-radius: 6px;
+          margin: 0 2px;
+          border: 1px solid #dee2e6;
+          color: #6c757d;
+
+          &:hover {
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+          }
+        }
+
+        .page-item.active .page-link {
+          background-color: #007bff;
+          border-color: #007bff;
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .reports-container {
+    .report-settings {
+      .report-panel {
+        .row {
+          margin: 0;
+
+          .col-md-4 {
+            padding: 0;
+            margin-bottom: 1rem;
+          }
+
+          .col-12 {
+            padding: 0;
+            margin-top: 0.5rem;
+          }
+        }
+
+        .report-generate {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+
+    .applied-filters {
+      .filters-list {
+        .filter-badge {
+          font-size: 0.7rem;
+          padding: 0.2rem 0.6rem;
+        }
+      }
+    }
+
+    .report-table {
+      .report-card {
+        margin: 0 0.5rem;
+        margin-top: 1.5rem;
+
+        .table-responsive {
+          border-radius: 12px;
+        }
+      }
+    }
+  }
+}
